@@ -1,4 +1,122 @@
-User-agent: *
-Allow: /
+# 糸島旬送和食 喜友 公式HP
 
-Sitemap: https://daisukekiyohara-tech.github.io/hakata-wasyoku-kiyu/sitemap.xml
+## 写真が表示されない時のトラブルシューティング
+
+### 症状: 写真が出ない / レイアウトが崩れる
+
+#### 原因①: imagesフォルダがアップロードされていない（最も多い）
+
+**確認方法:**
+ブラウザで以下のURLにアクセスしてみてください：
+```
+https://github.com/[あなたのユーザー名]/[リポジトリ名]/tree/main/images
+```
+
+- **404が出た** → imagesフォルダがアップロードされていません → 下記の手順③を実行
+- **画像一覧が見える** → 原因②または③を確認
+
+---
+
+#### 原因②: ファイル名の大文字小文字違い
+
+GitHub Pagesは大文字小文字を厳密に区別します。
+全ファイル名が小文字であることを確認してください。
+
+---
+
+#### 原因③: ブラウザキャッシュ
+
+更新したのに古いまま見える場合：
+- Windows: `Ctrl + Shift + R`
+- Mac: `Cmd + Shift + R`
+- またはシークレットモード（プライベートブラウジング）で開く
+
+---
+
+## 正しいアップロード手順
+
+### 手順A: WEB UIから（推奨・初心者向け）
+
+1. **GitHubリポジトリを開く**
+   `https://github.com/daisukekiyohara-tech/hakata-wasyoku-kiyuu`
+
+2. **既存ファイルを全削除**
+   - 「Code」タブで各ファイルをクリック→ゴミ箱アイコン→Commit
+   - または Settings → 旧コミットに戻して整理
+
+3. **ZIPを解凍**
+   - Windowsの場合: 右クリック→「すべて展開」
+   - Macの場合: ダブルクリックで自動解凍
+
+4. **解凍したフォルダの中身を確認**
+   ```
+   解凍したフォルダ/
+   ├── index.html
+   ├── kiyu_*.html (7つ)
+   ├── lp-*.html (5つ)
+   ├── column-*.html (3つ)
+   ├── robots.txt / sitemap.xml / favicon.svg / og-image.jpg
+   ├── README.md / .nojekyll
+   └── images/  ← ★★ このフォルダごとアップロード必須 ★★
+   ```
+
+5. **GitHubに「Add file」→「Upload files」**
+   - 解凍してできた**全16個のHTML**をドラッグ
+   - **imagesフォルダごと**ドラッグ
+   - SEOファイル（robots.txt等）もドラッグ
+   - Commit changes
+
+6. **2〜3分待つ**
+   - GitHub Pagesの自動ビルドを待ちます
+   - 上記のリポジトリ → Actions タブ で進行確認可能
+
+7. **シークレットモードで確認**
+   キャッシュの影響を排除するために、必ずシークレットモードで開く
+
+---
+
+### 手順B: GitHub Desktop（中級者向け）
+
+1. GitHub Desktop でリポジトリを開く
+2. ローカルの該当フォルダ内の中身を **すべて空にする**
+3. ZIPを解凍した中身を **同じフォルダにコピー**
+4. GitHub Desktopで変更内容を確認 → Commit → Push
+
+---
+
+## ファイル構成
+
+```
+リポジトリのルート/
+├── index.html              ← TOPページ
+├── kiyu_kodawari.html      ← こだわり
+├── kiyu_menu.html          ← 夜会席
+├── kiyu_hiru.html          ← 昼会席（ランチタブ含む）
+├── kiyu_lunch.html         ← ランチ独立ページ
+├── kiyu_drink.html         ← ドリンク
+├── kiyu_taidai.html        ← 夫婦鯛お祝い
+├── kiyu_access.html        ← アクセス
+├── lp-settai.html          ← 接待特集LP
+├── lp-enkai.html           ← 宴会特集LP
+├── lp-kaowase.html         ← 顔合わせ特集LP
+├── lp-nihonshu.html        ← 日本酒特集LP
+├── lp-lunch-taicha.html    ← ランチ・鯛茶漬け特集LP
+├── column-settai-eraikata.html  ← 記事
+├── column-kaowase-mistake.html  ← 記事
+├── column-nomihoudai.html       ← 記事
+├── robots.txt              ← SEO
+├── sitemap.xml             ← SEO
+├── favicon.svg             ← アイコン
+├── og-image.jpg            ← SNS共有画像
+├── README.md               ← この説明書
+├── .nojekyll               ← GitHub Pages設定（必須）
+└── images/                 ← 画像フォルダ（25枚）
+```
+
+---
+
+## SEO・公開後にやるべきこと
+
+1. Google Search Console に sitemap.xml を送信
+2. Googleビジネスプロフィールに公式URLを登録
+3. 月1回ペースでブログ・記事を追加
